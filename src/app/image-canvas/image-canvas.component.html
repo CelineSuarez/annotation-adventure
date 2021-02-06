@@ -1,12 +1,15 @@
 <h3>{{image.name}}</h3>
-    <div id="buttonsSection">
-        <button mat-raised-button color="primary" (click)="animateCanvas()">
+    <div class="buttons-section">
+        <button mat-raised-button color="primary" (click)="allowDrawingOnCanvas()">
             <mat-icon aria-hidden="false" aria-label="Draw Freeform">create</mat-icon>
         </button>
         <button mat-raised-button color="warn" (click)="clearCanvas()">
             <mat-icon aria-hidden="false" aria-label="Clear All Annotations">delete_forever</mat-icon>
         </button>
+        <button mat-raised-button class="success-button" (click)="saveAnnotations()">
+            <mat-icon aria-hidden="false" aria-label="Save Annotations">save</mat-icon>
+        </button>
     </div>
-    <div id="imageSection">
+    <div class="image-section">
         <canvas #canvasImg width="385px" height="400px"></canvas>
     </div>

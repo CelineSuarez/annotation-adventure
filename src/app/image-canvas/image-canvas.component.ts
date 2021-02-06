@@ -20,6 +20,7 @@ export class ImageCanvasComponent implements OnInit {
   }
   canvasWidth = 385;
   canvasHeight = 400;
+  canvasElement: HTMLCanvasElement;
 
   constructor() { }
 
@@ -31,13 +32,22 @@ export class ImageCanvasComponent implements OnInit {
       imgType: 'sonogram32wks'
     }
 
-    const canvasEl: HTMLCanvasElement = this.canvasImg.nativeElement;
-    this.ctx = canvasEl.getContext('2d');
-    
+    this.canvasElement = this.canvasImg.nativeElement;
+    this.ctx = this.canvasElement.getContext('2d');
+  }
+
+  allowDrawingOnCanvas() {
     this.ctx.lineWidth = 5;
     this.ctx.lineCap = 'round';
     this.ctx.strokeStyle = '#FFFF4F';
-    this.captureEvents(canvasEl);
+    const canvasElm: HTMLCanvasElement = this.canvasImg.nativeElement;
+    this.captureEvents(canvasElm);
+  }
+
+  saveAnnotations(){
+    // In here we would call a service to save the current image, for now we will open a new tab with the saved annotations
+    this.canvasElement.toDataURL("image/png", 1.0);
+    console.log(this.canvasElement.toDataURL("image/png", 1.0));
   }
 
   clearCanvas(){
@@ -57,7 +67,7 @@ export class ImageCanvasComponent implements OnInit {
     }
   }
 
-  private captureEvents(canvasEl: HTMLCanvasElement) {
+  captureEvents(canvasEl: HTMLCanvasElement) {
     // this will capture all mousedown events from the canvas element
     fromEvent(canvasEl, 'mousedown')
       .pipe(
@@ -89,25 +99,10 @@ export class ImageCanvasComponent implements OnInit {
           x: res[1].clientX - rect.left,
           y: res[1].clientY - rect.top
         };
-  
-        // this method we'll implement soon to do the actual drawing
+          
         this.drawOnCanvasFreeForm(prevPos, currentPos);
       });
   }
 
-  animateCanvas(): void {
-    this.ctx.fillStyle = 'red';  
-    // const square = new Square(this.ctx);  
-    // square.draw(5, 1, 20);  
-    
-  }
-
 }
 
-// export class Square {
-//   constructor(private ctx: CanvasRenderingContext2D) {}
-
-//   draw(x: number, y: number, z: number) {
-//     this.ctx.fillRect(z * x, z * y, z, z);
-//   }
-// }

@@ -3,3 +3,14 @@ canvas {
     border: 1px solid black;
     background-image: url("https://ph-public-share.s3.amazonaws.com/fetal-ultrasound-1.png")
 }
+
+.buttons-section {
+    margin-bottom: 2em;
+    display: flex;
+    justify-content: space-between;
+}
+
+.success-button {
+    background-color: #3FB568;
+    color: #FFFFFF;
+}
