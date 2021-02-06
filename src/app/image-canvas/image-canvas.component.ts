@@ -1,6 +1,8 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { switchMap, takeUntil, pairwise } from 'rxjs/operators'
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-image-canvas',
@@ -11,10 +13,24 @@ import { switchMap, takeUntil, pairwise } from 'rxjs/operators'
 export class ImageCanvasComponent implements OnInit {
   @ViewChild('canvasImg', {static: true}) canvasImg: ElementRef<HTMLCanvasElement>;  
   private ctx: CanvasRenderingContext2D;
+  image: {
+    name: string,
+    fileSize: string,
+    imgType: string
+  }
+  canvasWidth = 385;
+  canvasHeight = 400;
 
   constructor() { }
 
   ngOnInit(): void {
+    // Initialize the image object
+    this.image = {
+      name: 'Sample Sonogram',
+      fileSize: '399kb',
+      imgType: 'sonogram32wks'
+    }
+
     const canvasEl: HTMLCanvasElement = this.canvasImg.nativeElement;
     this.ctx = canvasEl.getContext('2d');
     
@@ -22,6 +38,11 @@ export class ImageCanvasComponent implements OnInit {
     this.ctx.lineCap = 'round';
     this.ctx.strokeStyle = '#FFFF4F';
     this.captureEvents(canvasEl);
+  }
+
+  clearCanvas(){
+    // This can be made more dynamic with a function that gathers file width and height on ngOnInit
+    this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
   }
 
   drawOnCanvasFreeForm(previousPosition, currentPosition){

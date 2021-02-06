@@ -1,7 +1,12 @@
-<p>image-canvas works!</p>
-<div id="buttonsSection">
-    <button (click)="animateCanvas()">Play</button>
-</div>
-<div id="imageSection">
-    <canvas #canvasImg width="385px" height="400px" ></canvas>
-</div>
+<h3>{{image.name}}</h3>
+    <div id="buttonsSection">
+        <button mat-raised-button color="primary" (click)="animateCanvas()">
+            <mat-icon aria-hidden="false" aria-label="Draw Freeform">create</mat-icon>
+        </button>
+        <button mat-raised-button color="warn" (click)="clearCanvas()">
+            <mat-icon aria-hidden="false" aria-label="Clear All Annotations">delete_forever</mat-icon>
+        </button>
+    </div>
+    <div id="imageSection">
+        <canvas #canvasImg width="385px" height="400px"></canvas>
+    </div>
