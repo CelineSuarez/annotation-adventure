@@ -25,7 +25,7 @@ export class ImageCanvasComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    // Initialize the image object
+    // Initialize the image object (Typically I would create a folder for models and keep interfaces separate)
     this.image = {
       name: 'Sample Sonogram',
       fileSize: '399kb',
@@ -45,9 +45,9 @@ export class ImageCanvasComponent implements OnInit {
   }
 
   saveAnnotations(){
-    // In here we would call a service to save the current image, for now we will open a new tab with the saved annotations
+    // In here we would call a service to save the current image, for now we will generate a URL locally.
     this.canvasElement.toDataURL("image/png", 1.0);
-    console.log(this.canvasElement.toDataURL("image/png", 1.0));
+    // console.log(this.canvasElement.toDataURL("image/png", 1.0));
   }
 
   clearCanvas(){
